@@ -1,4 +1,33 @@
 {
-    "excursions": [],
-    "orders": []
+  "excursions": [
+    {
+      "title": "Kraków",
+      "description": " Miasto królów polskich",
+      "adultPrice": "234",
+      "childPrice": "134",
+      "id": 1
+    },
+    {
+      "title": "Kraków",
+      "description": " Miasto królów polskich",
+      "adultPrice": "234",
+      "childPrice": "134",
+      "id": 2
+    },
+    {
+      "title": "Kraków",
+      "description": " Miasto królów polskich",
+      "adultPrice": "234",
+      "childPrice": "134",
+      "id": 3
+    },
+    {
+      "title": "Kraków",
+      "description": " Miasto królów polskich",
+      "adultPrice": "234",
+      "childPrice": "134",
+      "id": 4
+    }
+  ],
+  "orders": []
 }
