@@ -24,34 +24,34 @@
     {
       "title": "Kraków",
       "description": " Miasto królów polskich",
-      "adultPrice": "234",
-      "childPrice": "134",
-      "id": 13
+      "adultPrice": 234,
+      "childPrice": 100,
+      "id": 14
     }
   ],
   "orders": [
-    {
-      "title": "Gdańsk",
-      "adultPrice": "500",
-      "adultNumber": 1,
-      "childPrice": "110",
-      "childNumber": 0,
-      "id": 1
-    },
     {
       "title": "Sopot",
       "adultPrice": "250",
       "adultNumber": 2,
       "childPrice": "100",
-      "childNumber": 1,
+      "childNumber": 2,
+      "id": 1
+    },
+    {
+      "title": "Gdańsk",
+      "adultPrice": "500",
+      "adultNumber": 2,
+      "childPrice": "110",
+      "childNumber": 0,
       "id": 2
     },
     {
       "title": "Kraków",
       "adultPrice": "234",
-      "adultNumber": 4,
-      "childPrice": "134",
-      "childNumber": 2,
+      "adultNumber": 1,
+      "childPrice": "100",
+      "childNumber": 1,
       "id": 3
     }
   ]

@@ -17,8 +17,8 @@ function init() {
 function load() {
     excursionsApi.loadExcursions('/excursions')
     excursionsApi.loadOrder()
-        .then(data => fillInSummary(data)
-        )
+        // .then(data => fillInSummary(data)
+        // )
 
 
 }
@@ -90,30 +90,30 @@ function sendOrderData(resp, data) {
 
 }
 
-function fillInSummary(data) {
-    const totalPriceElement = document.querySelector('.order__total-price-value')
-    const excursionPriceElement = document.querySelector('.summary__total-price')
+// function fillInSummary(data) {
+//     const totalPriceElement = document.querySelector('.order__total-price-value')
+//     const excursionPriceElement = document.querySelector('.summary__total-price')
 
-    const totalSum = countTotalSum(data)
-    totalPriceElement.textContent = totalSum + "PLN"
+//     const totalSum = countTotalSum(data)
+//     totalPriceElement.textContent = totalSum + "PLN"
 
-    console.log(totalSum)
-}
+//     console.log(totalSum)
+// }
 
-function countTotalSum(data) {
-    let price = 0
+// function countTotalSum(data) {
+//     let price = 0
 
-    const basket = data
-    basket.forEach(el => {
+//     const basket = data
+//     basket.forEach(el => {
 
-        price = price + el.adultPrice * el.adultNumber + el.childPrice * el.childNumber
-        return price
-    })
-    // console.log(basket)
+//         price = price + el.adultPrice * el.adultNumber + el.childPrice * el.childNumber
+//         return price
+//     })
+//     // console.log(basket)
 
 
-    return price
-}
+//     return price
+// }
 
 // function fillInSummary() {
 //     const totalPriceElement = document.querySelector('.order__total-price-value')
