@@ -18,29 +18,32 @@ document.addEventListener('DOMContentLoaded', init);
 function init() {
     console.log('admin');
 
-    excursionsApi.loadExcursions()
-
-    if (excursionForm) {
-        excursionForm.addEventListener('submit', handleForm)
-    }
+    excursionsApi.loadExcursions('/excursions')
+    addExcursion()
+    removeExcursion()
+    updateExcursion()
 }
 
-function handleForm(e) {
-    e.preventDefault()
-    errors = []
+function addExcursion() {
+    if (excursionForm) {
+        excursionForm.addEventListener('submit', (e) => {
+            e.preventDefault()
+            errors = []
 
-    const errorList = document.querySelector('.error-list')
-    if (errorList) {
-        errorList.innerHTML = ''
-    }
+            const errorList = document.querySelector('.error-list')
+            if (errorList) {
+                errorList.innerHTML = ''
+            }
 
-    const dataExcursion = getNewExcursion()
-    const formIsValid = validateForm()
+            const dataExcursion = getNewExcursion()
+            const formIsValid = validateForm()
 
-    if (formIsValid) {
-        addExcursionToJSON(dataExcursion)
-    } else {
-        createErrorMessage()
+            if (formIsValid) {
+                addExcursionToJSON(dataExcursion)
+            } else {
+                createErrorMessage()
+            }
+        })
     }
 }
 
@@ -88,12 +91,7 @@ function changeFontColor(color, element) {
 }
 
 function addExcursionToJSON(dataExcursion) {
-    const options = {
-        method: 'POST',
-        body: JSON.stringify(dataExcursion),
-        headers: { 'Content-Type': 'application/json' }
-    }
-    excursionsApi.addExcursion(options)
+    excursionsApi.add(dataExcursion, '/excursions')
 }
 
 function createErrorMessage() {
@@ -104,5 +102,66 @@ function createErrorMessage() {
         messageLi.textContent = error
         changeFontColor('red', messageLi)
         errorList.appendChild(messageLi)
+    })
+}
+
+function removeExcursion() {
+    const excursionsList = document.querySelector('.panel__excursions')
+    excursionsList.addEventListener('click', e => {
+        e.preventDefault()
+        if (e.target.value === 'usuń') {
+            const form = e.target.parentNode.parentNode
+            const liItem = form.parentNode
+
+            const id = liItem.dataset.id
+            excursionsApi.remove(id, '/excursions')
+        }
+    })
+}
+
+function updateExcursion() {
+    const excursionsList = document.querySelector('.panel__excursions')
+    excursionsList.addEventListener('click', e => {
+        if (e.target.classList.contains('excursions__field-input--update')) {
+            const form = e.target.parentNode.parentNode
+            const liItem = form.parentNode
+
+            const button = liItem.querySelector('.excursions__field-input--update')
+            const editableElements = liItem.querySelectorAll('.excursions--editable')
+
+            const editableElementsArr = [...editableElements]
+            const isEditable = editableElementsArr.every(el => el.isContentEditable)
+
+            if (isEditable) {
+                const id = liItem.dataset.id
+
+                const [titleEl, descriptionEl, adultPriceEl, childPriceEl] = editableElementsArr
+
+                const data = {
+                    title: titleEl.textContent,
+                    description: descriptionEl.textContent,
+                    adultPrice: Number(adultPriceEl.textContent),
+                    childPrice: Number(childPriceEl.textContent)
+                }
+
+                const options = {
+                    method: "PUT",
+                    body: JSON.stringify(data),
+                    headers: { "Content-Type": "application/json" }
+                }
+
+                console.log(typeof data.adultPrice)
+                if (isNaN(data.adultPrice) || isNaN(data.childPrice)) {
+                    alert('Pole "dorosły" oraz pole "dziecko" muszą być liczbą')
+                } else excursionsApi.update(`/excursions/${id}`, options, editableElementsArr, button)
+
+
+            }
+            else {
+                button.value = 'zapisz'
+                editableElementsArr.forEach(el => el.contentEditable = true)
+
+            }
+        }
     })
 }
