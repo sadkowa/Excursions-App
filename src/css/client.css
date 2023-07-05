@@ -11,9 +11,9 @@ body {
 ul {
     list-style: none;
 
-} 
+}
 
-li{
+li {
     list-style: none;
     margin-top: 5px;
 }
@@ -22,7 +22,7 @@ li{
     margin-top: 10px;
     padding: 5px 10px;
     text-transform: uppercase;
-    background-color:  #111;
+    background-color: #111;
     color: white;
     border-radius: 5px;
     border: none
@@ -38,6 +38,8 @@ li{
 
 .panel__excursions {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
     gap: 10px;
     width: 70%;
 }
@@ -47,10 +49,11 @@ li{
 }
 
 .excursions__item {
+    margin-bottom: 10px;
     border: 1px solid #bbb;
     border-radius: 5px;
     padding: 20px;
-    width: calc(50% - 20px);
+    width: 32%;
     min-height: 50vh;
     background-color: aquamarine;
 }
@@ -82,13 +85,14 @@ li{
     padding-bottom: 20px;
 }
 
-.order__field, .excursions__field, .excursions__description{
-    margin-top:10px
+.order__field, .excursions__field, .excursions__description {
+    margin-top: 10px
 }
 
 .order__total-price {
+    font-size: 1.3rem;
     text-transform: uppercase;
-    color:red
+    color: red
 }
 
 .order__field-input {
@@ -100,17 +104,17 @@ li{
     border: none
 }
 
-.panel__summary{
+.panel__summary {
     margin: 20px 0
 }
 
-.order__error{
-    color:red
+.order__error {
+    color: red
 }
 
-.summary__btn-remove{
+.summary__btn-remove {
     padding: 2px 5px;
-    background-color:  #111;
+    background-color: #111;
     color: white;
     border-radius: 5px;
     border: none;

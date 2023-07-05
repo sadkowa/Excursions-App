@@ -57,15 +57,16 @@ function getOrderData(e) {
     const childPrice = form.querySelector('.excursions__child-price')
     const [adultPriceInput, childPriceInput] = form.elements
 
-    if (adultPriceInput.value === '' && childPriceInput.value === '') {
-        return alert('Uzupełnij pole "dorosły" lub "dziecko"')
-    }
     const data = {
         title: title.textContent,
         adultPrice: adultPrice.textContent,
         adultNumber: Number(adultPriceInput.value),
         childPrice: childPrice.textContent,
         childNumber: Number(childPriceInput.value)
+    }
+
+    if (data.adultNumber === 0 && data.childNumber === 0) {
+        return alert('Uzupełnij pole "dorosły" lub "dziecko"')
     }
     return data
 }
@@ -179,6 +180,7 @@ function sendOrderData() {
                 excursionsApi.add(data, '/orders')
                 clearOrderForm(nameInput, emailInput, totalSumInput)
                 console.log('Zamówienie zostało wysłane')
+                alert('Zamówienie zostało wysłane')
             }
         }
     })

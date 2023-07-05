@@ -23,6 +23,49 @@
     }
   ],
   "orders": [
-   
+    {
+      "name": "dddd",
+      "email": "jaoj@isk.pl",
+      "totalSum": "1150PLN",
+      "orderDetails": [
+        {
+          "title": "Sopot",
+          "adultPrice": "250",
+          "adultNumber": 1,
+          "childPrice": "170",
+          "childNumber": 2
+        },
+        {
+          "title": "Kraków",
+          "adultPrice": "260",
+          "adultNumber": 1,
+          "childPrice": "100",
+          "childNumber": 0
+        },
+        {
+          "title": "Gdańsk",
+          "adultPrice": "500",
+          "adultNumber": 0,
+          "childPrice": "300",
+          "childNumber": 1
+        }
+      ],
+      "id": 1
+    },
+    {
+      "name": "dddd",
+      "email": "jaoj@isk.pl",
+      "totalSum": "0PLN",
+      "orderDetails": [
+        {
+          "title": "Kraków",
+          "adultPrice": "260",
+          "adultNumber": 0,
+          "childPrice": "100",
+          "childNumber": 0
+        }
+      ],
+      "id": 2
+    }
   ]
 }
