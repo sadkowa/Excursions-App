@@ -4,47 +4,115 @@
     box-sizing: border-box;
 }
 
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
 ul {
     list-style: none;
+
+} 
+
+li{
+    list-style: none;
+    margin-top: 5px;
+}
+
+.button {
+    margin-top: 10px;
+    padding: 5px 10px;
+    text-transform: uppercase;
+    background-color:  #111;
+    color: white;
+    border-radius: 5px;
+    border: none
 }
 
 .panel {
     display: flex;
+    gap: 10px;
     margin: 0 auto;
     max-width: 1200px;
     padding: 30px 0;
 }
 
-.panel__excursins {
+.panel__excursions {
+    display: flex;
+    gap: 10px;
     width: 70%;
 }
 
 .excursions {
     display: flex;
-    flex-wrap: wrap;
 }
 
-.excurions__item {
+.excursions__item {
     border: 1px solid #bbb;
     border-radius: 5px;
-    margin: 10px;
     padding: 20px;
     width: calc(50% - 20px);
+    min-height: 50vh;
+    background-color: aquamarine;
+}
+
+.excursions__number {
+    width: 30px;
+    height: 20px;
+    border: none;
+    margin-left: 5px;
+    border-radius: 5px;
 }
 
 .excursions__item--prototype, .summary__item--prototype {
     display: none
 }
 
-
 .panel__form {
     background-color: #f4f4f4;
     padding: 20px;
     width: 30%;
+    border-radius: 5px;
+    background-color: rgb(240, 255, 127);
+
 }
 
 .uploader, .order {
     border-bottom: 1px solid #bbb;
     margin-bottom: 20px;
     padding-bottom: 20px;
+}
+
+.order__field, .excursions__field, .excursions__description{
+    margin-top:10px
+}
+
+.order__total-price {
+    text-transform: uppercase;
+    color:red
+}
+
+.order__field-input {
+    margin-top: 10px;
+    padding: 5px;
+    width: 100%;
+    text-transform: uppercase;
+    border-radius: 5px;
+    border: none
+}
+
+.panel__summary{
+    margin: 20px 0
+}
+
+.order__error{
+    color:red
+}
+
+.summary__btn-remove{
+    padding: 2px 5px;
+    background-color:  #111;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    text-decoration: none;
 }
