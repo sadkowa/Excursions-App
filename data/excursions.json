@@ -4,37 +4,61 @@
       "title": "Gdańsk",
       "description": " Miasto nad Bałtykiem",
       "adultPrice": 500,
-      "childPrice": 110,
+      "childPrice": 300,
       "id": 9
     },
     {
       "title": "Sopot",
-      "description": " Miasto królów polskich",
+      "description": " Miasto nad Bałtykiem",
       "adultPrice": 250,
-      "childPrice": 100,
+      "childPrice": 170,
       "id": 11
     },
     {
-      "title": "Poznań",
-      "description": " Miasto królów polskich",
-      "adultPrice": "234",
-      "childPrice": "134",
-      "id": 12
-    },
-    {
       "title": "Kraków",
       "description": " Miasto królów polskich",
-      "adultPrice": 234,
+      "adultPrice": 260,
       "childPrice": 100,
       "id": 14
-    },
-    {
-      "title": "Kraków",
-      "description": " Miasto królów polskich",
-      "adultPrice": "234",
-      "childPrice": "134",
-      "id": 15
     }
   ],
-  "orders": []
+  "orders": [
+    {
+      "name": "dddd",
+      "email": "jaoj@isk.pl",
+      "totalSum": "484PLN",
+      "orderDetails": [
+        {
+          "title": "Kraków",
+          "adultPrice": "234",
+          "adultNumber": 1,
+          "childPrice": "100",
+          "childNumber": 0
+        },
+        {
+          "title": "Sopot",
+          "adultPrice": "250",
+          "adultNumber": 1,
+          "childPrice": "100",
+          "childNumber": 0
+        }
+      ],
+      "id": 1
+    },
+    {
+      "name": "q",
+      "email": "2@",
+      "totalSum": "234PLN",
+      "orderDetails": [
+        {
+          "title": "Kraków",
+          "adultPrice": "234",
+          "adultNumber": 1,
+          "childPrice": "100",
+          "childNumber": 0
+        }
+      ],
+      "id": 2
+    }
+  ]
 }

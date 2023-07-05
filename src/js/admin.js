@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', init);
 function init() {
     console.log('admin');
 
-    excursionsApi.loadExcursions('/excursions')
+    excursionsApi.load('/excursions')
     addExcursion()
     removeExcursion()
     updateExcursion()
@@ -28,12 +28,7 @@ function addExcursion() {
     if (excursionForm) {
         excursionForm.addEventListener('submit', (e) => {
             e.preventDefault()
-            errors = []
-
-            const errorList = document.querySelector('.error-list')
-            if (errorList) {
-                errorList.innerHTML = ''
-            }
+            clearErrorList()
 
             const dataExcursion = getNewExcursion()
             const formIsValid = validateForm()
@@ -47,6 +42,15 @@ function addExcursion() {
     }
 }
 
+function clearErrorList() {
+    errors = []
+
+    const errorList = document.querySelector('.error-list')
+    if (errorList) {
+        errorList.innerHTML = ''
+    }
+}
+
 function getNewExcursion() {
     const [titleInput, descriptionInput, adultPriceInput, childPriceInput] = excursionForm.elements
 
@@ -56,6 +60,7 @@ function getNewExcursion() {
     const childPrice = childPriceInput.value
 
     const data = { title, description, adultPrice, childPrice }
+
     return data
 }
 
@@ -109,6 +114,7 @@ function removeExcursion() {
     const excursionsList = document.querySelector('.panel__excursions')
     excursionsList.addEventListener('click', e => {
         e.preventDefault()
+
         if (e.target.value === 'usuń') {
             const form = e.target.parentNode.parentNode
             const liItem = form.parentNode
@@ -130,19 +136,12 @@ function updateExcursion() {
             const editableElements = liItem.querySelectorAll('.excursions--editable')
 
             const editableElementsArr = [...editableElements]
-            const isEditable = editableElementsArr.every(el => el.isContentEditable)
+            const isEditable = checkIfIsEditable(editableElementsArr)
 
             if (isEditable) {
                 const id = liItem.dataset.id
 
-                const [titleEl, descriptionEl, adultPriceEl, childPriceEl] = editableElementsArr
-
-                const data = {
-                    title: titleEl.textContent,
-                    description: descriptionEl.textContent,
-                    adultPrice: Number(adultPriceEl.textContent),
-                    childPrice: Number(childPriceEl.textContent)
-                }
+                const data = createDataObj(editableElementsArr)
 
                 const options = {
                     method: "PUT",
@@ -150,18 +149,34 @@ function updateExcursion() {
                     headers: { "Content-Type": "application/json" }
                 }
 
-                console.log(typeof data.adultPrice)
                 if (isNaN(data.adultPrice) || isNaN(data.childPrice)) {
                     alert('Pole "dorosły" oraz pole "dziecko" muszą być liczbą')
-                } else excursionsApi.update(`/excursions/${id}`, options, editableElementsArr, button)
-
-
+                } else {
+                    excursionsApi.update(`/excursions/${id}`, options)
+                        .then(() => {
+                            button.value = 'edytuj'
+                            editableElementsArr.forEach(el => el.contentEditable = false)
+                        })
+                }
             }
             else {
                 button.value = 'zapisz'
                 editableElementsArr.forEach(el => el.contentEditable = true)
-
             }
         }
     })
+}
+
+function checkIfIsEditable(editableElementsArr) {
+    return editableElementsArr.every(el => el.isContentEditable)
+}
+
+function createDataObj([titleEl, descriptionEl, adultPriceEl, childPriceEl]) {
+    const data = {
+        title: titleEl.textContent,
+        description: descriptionEl.textContent,
+        adultPrice: Number(adultPriceEl.textContent),
+        childPrice: Number(childPriceEl.textContent)
+    }
+    return data
 }
