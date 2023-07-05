@@ -16,61 +16,62 @@ class ExcursionsAPI {
     loadOrder() {
         return this._fetch('/orders')
             .then(data => {
-                this.fillInSummary(data)
+                // this.fillInSummary(data)
+                return data
             })
             .catch(err => console.error(err))
     }
 
-    fillInSummary(data) {
-        const totalPriceElement = document.querySelector('.order__total-price-value')
+    // fillInSummary(data) {
+    //     const totalPriceElement = document.querySelector('.order__total-price-value')
 
-        const totalSum = this.countTotalSum(data)
-        totalPriceElement.textContent = totalSum + "PLN"
+    //     const totalSum = this.countTotalSum(data)
+    //     totalPriceElement.textContent = totalSum + "PLN"
 
-        this.fillInExcursionSummary(data)
-    }
+    //     this.fillInExcursionSummary(data)
+    // }
 
-    countTotalSum(data) {
-        let price = 0
+    // countTotalSum(data) {
+    //     let price = 0
 
-        const basket = data
-        basket.forEach(el => {
+    //     const basket = data
+    //     basket.forEach(el => {
 
-            price = price + el.adultPrice * el.adultNumber + el.childPrice * el.childNumber
-            return price
-        })
-        return price
-    }
+    //         price = price + el.adultPrice * el.adultNumber + el.childPrice * el.childNumber
+    //         return price
+    //     })
+    //     return price
+    // }
 
-    fillInExcursionSummary(data) {
-        const summaryPanel = document.querySelector('.panel__summary')
-        const summaryEl = document.querySelector('.summary__item--prototype')
+    // fillInExcursionSummary(data) {
+    //     const summaryPanel = document.querySelector('.panel__summary')
+    //     const summaryEl = document.querySelector('.summary__item--prototype')
 
-        data.forEach(item => {
-            const excursionItem = summaryEl.cloneNode(true)
-            excursionItem.classList.remove('summary__item--prototype')
+    //     data.forEach(item => {
+    //         const excursionItem = summaryEl.cloneNode(true)
+    //         excursionItem.classList.remove('summary__item--prototype')
 
-            const titleEl = excursionItem.querySelector('.summary__name')
-            const totalEl = excursionItem.querySelector('.summary__total-price')
-            const adultPriceEl = excursionItem.querySelector('.summary__adult-price')
-            const childPriceEl = excursionItem.querySelector('.summary__child-price')
-            const adultNumberEl = excursionItem.querySelector('.summary__adult-number')
-            const childNumberEl = excursionItem.querySelector('.summary__child-number')
+    //         const titleEl = excursionItem.querySelector('.summary__name')
+    //         const totalEl = excursionItem.querySelector('.summary__total-price')
+    //         const adultPriceEl = excursionItem.querySelector('.summary__adult-price')
+    //         const childPriceEl = excursionItem.querySelector('.summary__child-price')
+    //         const adultNumberEl = excursionItem.querySelector('.summary__adult-number')
+    //         const childNumberEl = excursionItem.querySelector('.summary__child-number')
 
-            const { title, adultPrice, adultNumber, childPrice, childNumber } = item
+    //         const { title, adultPrice, adultNumber, childPrice, childNumber } = item
 
-            // if(excursionItem)
-            const sum = adultNumber * adultPrice + childNumber * childPrice
-            titleEl.textContent = title
-            totalEl.textContent = sum + "PLN"
-            adultPriceEl.textContent = adultPrice + "PLN"
-            childPriceEl.textContent = childPrice  + "PLN"
-            adultNumberEl.textContent = adultNumber
-            childNumberEl.textContent = childNumber
+    //         // if(excursionItem)
+    //         const sum = adultNumber * adultPrice + childNumber * childPrice
+    //         titleEl.textContent = title
+    //         totalEl.textContent = sum + "PLN"
+    //         adultPriceEl.textContent = adultPrice + "PLN"
+    //         childPriceEl.textContent = childPrice  + "PLN"
+    //         adultNumberEl.textContent = adultNumber
+    //         childNumberEl.textContent = childNumber
 
-            summaryPanel.appendChild(excursionItem)
-        })
-    }
+    //         summaryPanel.appendChild(excursionItem)
+    //     })
+    // }
 
     insert(data) {
         const excursionsPanel = document.querySelector('.panel__excursions')
