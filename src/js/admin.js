@@ -18,10 +18,50 @@ document.addEventListener('DOMContentLoaded', init);
 function init() {
     console.log('admin');
 
-    excursionsApi.load('/excursions')
+    loadExcursions()
     addExcursion()
     removeExcursion()
     updateExcursion()
+}
+
+function loadExcursions() {
+    excursionsApi.load('/excursions')
+        .then(data => insertExcursions(data))
+}
+function insertExcursions(data) {
+    const excursionsPanel = document.querySelector('.panel__excursions')
+
+    clearExcursions(excursionsPanel)
+    createNewExcursionElement(data, excursionsPanel)
+}
+
+function clearExcursions(excursionsPanel) {
+    const children = [...excursionsPanel.children]
+    children.forEach(item => {
+        if (!item.classList.contains('excursions__item--prototype'))
+            excursionsPanel.removeChild(item)
+    })
+}
+function createNewExcursionElement(data, excursionsPanel) {
+    const excursionPrototype = document.querySelector('.excursions__item--prototype')
+
+    data.forEach(item => {
+        const newExcursion = excursionPrototype.cloneNode(true)
+        newExcursion.dataset.id = item.id
+        const title = newExcursion.querySelector('.excursions__title')
+        const description = newExcursion.querySelector('.excursions__description')
+        const adultPrice = newExcursion.querySelector('.excursions__adult-price')
+        const childPrice = newExcursion.querySelector('.excursions__child-price')
+
+        title.textContent = item.title
+        description.textContent = item.description
+        adultPrice.textContent = Number(item.adultPrice)
+        childPrice.textContent = Number(item.childPrice)
+
+        newExcursion.classList.remove('excursions__item--prototype')
+
+        excursionsPanel.appendChild(newExcursion)
+    })
 }
 
 function addExcursion() {
@@ -97,6 +137,8 @@ function changeFontColor(color, element) {
 
 function addExcursionToJSON(dataExcursion) {
     excursionsApi.add(dataExcursion, '/excursions')
+        .then(() => excursionsApi.load('/excursions'))
+        .then((data) => insertExcursions(data))
 }
 
 function createErrorMessage() {
@@ -121,6 +163,8 @@ function removeExcursion() {
 
             const id = liItem.dataset.id
             excursionsApi.remove(id, '/excursions')
+                .then(() => excursionsApi.load('/excursions'))
+                .then((data) => insertExcursions(data))
         }
     })
 }

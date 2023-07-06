@@ -11,13 +11,52 @@ document.addEventListener('DOMContentLoaded', init)
 function init() {
     console.log('client');
 
-    excursionsApi.load('/excursions')
+    loadExcursions()
+    // excursionsApi.load('/excursions')
     addItemToBasket()
     removeItemFromBasket()
     sendOrderData()
 }
 
+function loadExcursions() {
+    excursionsApi.load('/excursions')
+        .then(data => insertExcursions(data))
+}
+function insertExcursions(data) {
+    const excursionsPanel = document.querySelector('.panel__excursions')
 
+    clearExcursions(excursionsPanel)
+    createNewExcursionElement(data, excursionsPanel)
+}
+
+function clearExcursions(excursionsPanel) {
+    const children = [...excursionsPanel.children]
+    children.forEach(item => {
+        if (!item.classList.contains('excursions__item--prototype'))
+            excursionsPanel.removeChild(item)
+    })
+}
+function createNewExcursionElement(data, excursionsPanel) {
+    const excursionPrototype = document.querySelector('.excursions__item--prototype')
+
+    data.forEach(item => {
+        const newExcursion = excursionPrototype.cloneNode(true)
+        newExcursion.dataset.id = item.id
+        const title = newExcursion.querySelector('.excursions__title')
+        const description = newExcursion.querySelector('.excursions__description')
+        const adultPrice = newExcursion.querySelector('.excursions__adult-price')
+        const childPrice = newExcursion.querySelector('.excursions__child-price')
+
+        title.textContent = item.title
+        description.textContent = item.description
+        adultPrice.textContent = Number(item.adultPrice)
+        childPrice.textContent = Number(item.childPrice)
+
+        newExcursion.classList.remove('excursions__item--prototype')
+
+        excursionsPanel.appendChild(newExcursion)
+    })
+}
 function addItemToBasket() {
     const excursionList = document.querySelector('.panel__excursions')
 
@@ -89,6 +128,7 @@ function fillInTotalSum() {
 function fillInExcursionSummary() {
     const summaryPanel = document.querySelector('.panel__summary')
     const summaryEl = document.querySelector('.summary__item--prototype')
+
     const sumChildren = [...summaryPanel.children]
     sumChildren.forEach(child => {
         if (!child.classList.contains('summary__item--prototype')) {
@@ -129,10 +169,10 @@ function createExcursionElement(item, excursionItem, summaryPanel) {
 }
 
 function removeItemFromBasket() {
-    const panelForm = document.querySelector('.panel__form')
+    const summaryList = document.querySelector('.panel__summary')
 
-    if (panelForm) {
-        panelForm.addEventListener('click', e => {
+    if (summaryList) {
+        summaryList.addEventListener('click', e => {
             e.preventDefault()
             if (e.target.title === 'usuń') {
                 const currentSummaryItem = e.target.parentNode.parentNode
@@ -149,39 +189,36 @@ function removeItemFromBasket() {
 }
 
 function sendOrderData() {
-
     const form = document.querySelector('.panel__order')
 
-    form.addEventListener('click', e => {
+    form.addEventListener('submit', e => {
         e.preventDefault()
 
-        if (e.target.value === "zamawiam") {
-            clearErrorList()
+        clearErrorList()
 
-            const totalSumInput = document.querySelector('.order__total-price-value')
-            const totalSum = totalSumInput.textContent
-            const [nameInput, emailInput] = form.elements
+        const totalSumInput = document.querySelector('.order__total-price-value')
+        const totalSum = totalSumInput.textContent
+        const [nameInput, emailInput] = form.elements
 
-            const name = nameInput.value
-            const email = emailInput.value
+        const name = nameInput.value
+        const email = emailInput.value
 
-            checkConditions(name, email)
+        checkConditions(name, email)
 
-            const isValid = formValidate()
+        const isValid = formValidate()
 
-            if (isValid) {
-                const data = {
-                    name,
-                    email,
-                    totalSum,
-                    orderDetails: basket
-                }
-
-                excursionsApi.add(data, '/orders')
-                clearOrderForm(nameInput, emailInput, totalSumInput)
-                console.log('Zamówienie zostało wysłane')
-                alert('Zamówienie zostało wysłane')
+        if (isValid) {
+            const data = {
+                name,
+                email,
+                totalSum,
+                orderDetails: basket
             }
+
+            excursionsApi.add(data, '/orders')
+            clearOrderForm(nameInput, emailInput, totalSumInput)
+            console.log('Zamówienie zostało wysłane')
+            alert('Zamówienie zostało wysłane')
         }
     })
 
@@ -219,7 +256,13 @@ function formValidate() {
 ``
 function clearOrderForm(nameInput, emailInput, totalSumInput) {
     const summaryPanel = document.querySelector('.panel__summary')
-    summaryPanel.innerHTML = ''
+    const summaryChildren = [...summaryPanel.children]
+
+    summaryChildren.forEach(child => {
+        if (!child.classList.contains('summary__item--prototype')) {
+            summaryPanel.removeChild(child)
+        }
+    })
 
     basket = []
     nameInput.value = ''
