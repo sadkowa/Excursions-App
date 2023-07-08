@@ -2,11 +2,7 @@ import './../css/admin.css';
 
 import ExcursionsAPI from './ExcursionsAPI';
 
-const formFields = [
-    { name: 'title', label: 'Nazwa', required: true },
-    { name: 'description', label: 'Opis', required: true },
-    { name: 'adultPrice', label: 'Cena dorosły', type: 'number', required: true },
-    { name: 'childPrice', label: 'Cena dziecko', type: 'number', required: true }]
+import formFields from './formFields.js'
 
 let errors = []
 
@@ -137,8 +133,7 @@ function changeFontColor(color, element) {
 
 function addExcursionToJSON(dataExcursion) {
     excursionsApi.add(dataExcursion, '/excursions')
-        .then(() => excursionsApi.load('/excursions'))
-        .then((data) => insertExcursions(data))
+        .then(() => loadExcursions())
 }
 
 function createErrorMessage() {
@@ -163,8 +158,7 @@ function removeExcursion() {
 
             const id = liItem.dataset.id
             excursionsApi.remove(id, '/excursions')
-                .then(() => excursionsApi.load('/excursions'))
-                .then((data) => insertExcursions(data))
+                .then(() => loadExcursions())
         }
     })
 }
