@@ -1,6 +1,8 @@
 # Excursions App
 
-Aplikacja dzieli się na dwie części: Client oraz Admin
+Aplikacja dzieli się na dwie części: 
+ - Client: https://sadkowa.github.io/Excursions-App/build/index.html
+ - Admin: https://sadkowa.github.io/Excursions-App/build/admin.html
 
 ### Client
 
