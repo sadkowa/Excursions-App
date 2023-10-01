@@ -57,7 +57,7 @@ npm install -g json-server@0.17
 W kolejnym terminalu uruchom API:
 
 ```
-json-server --watch ./db/data.json --port 3000
+json-server --watch ./data/excursions.json --port 3000
 ```
 
 Od teraz API (w zależności od zasobów) jest dostępne pod adresem:
