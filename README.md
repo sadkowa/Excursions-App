@@ -1,30 +1,29 @@
 # Excursions App
 
-Aplikacja dzieli się na dwie części: 
+The application is divided into two parts:
  - Client: https://sadkowa.github.io/Excursions-App/build/index.html
  - Admin: https://sadkowa.github.io/Excursions-App/build/admin.html
 
 ### Client
+This is the part related to what the user can do:
 
-To część związana z tym, co może zrobić użytkownik:
-* wybrać wycieczkę przez wprowadzenie ilości zamawianych biletów w odpowiednie pola formularza i kliknięcie `dodaj do zamówienia`. Wiąże się to z:
-    * walidacją danych
-    * dodawaniem zamówienia do panelu z prawej strony, tj. do koszyka
-    * aktualizowaniem ceny za całość
-* potwierdzić zamówienie poprzez wprowadzenie imienia, nazwiska oraz adresu email do pola zamówienia i kliknięcie `zamawiam`. Wiąże się to z:
-    * walidacją danych
-    * wysłaniem zamówienia do bazy danych (API uruchomione dzięki JSON Server)
-    * wyczyszczeniem koszyka.
-
+* Select a tour by entering the quantity of tickets in the appropriate form fields and clicking 'Dodaj do zamówienia'. This involves:
+    * Data validation
+    * Adding the order to the panel on the right, i.e., the cart
+    * Updating the total price
+* Confirm the order by entering the first name, last name, and email address in the order field and clicking 'Zamawiam'. This involves:
+    * Data validation
+    * Sending the order to the database (API powered by JSON Server)
+    * Clearing the cart.
 
 ### Admin    
-Panel zarządzania wycieczkami zapisanymi w bazie danych. Jego funkcjonalności to: 
-* dodawanie wycieczek
-* usuwanie wycieczek
-* modyfikowanie wycieczek.
+The management panel for tours stored in the database. Its functionalities include:
 
+* Adding tours
+* Deleting tours
+* Modifying tours.
 
-## Użyte technologie
+## The technologies used
 
 ![JavaScript](https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E)
 ![JSON Server](https://img.shields.io/badge/JSON%20Server-6f736d?style=for-the-badge&logo=JSON&logoColor=white)
@@ -36,40 +35,40 @@ Panel zarządzania wycieczkami zapisanymi w bazie danych. Jego funkcjonalności 
 ![BEM Methodology](https://img.shields.io/badge/BEM%20Methodology-29BDfD?style=for-the-badge&logo=BEM&logoColor=white)
 ![NPM](https://img.shields.io/badge/NPM-CB3837?style=for-the-badge&logo=npm&logoColor=white)
 
-## Instalacja i konfiguracja
+## Installation and configuration
 
-W projekcie zostały użyte [node](https://nodejs.org/en/) and [npm](https://www.npmjs.com/). Jeśli masz je zainstalowane, wpisz w terminalu: 
+In the project, [node](https://nodejs.org/en/) and [npm](https://www.npmjs.com/) have been used. If you have them installed, enter the following in the terminal:
 
 ````
 npm i
 ````
 
-Aby otworzyć aplikację w trybie deweloperskim użyj komendy: 
+To open the application in developer mode, use the following command:
 
 ````
 npm start
 ````
 
-Jeśli nie masz zainstalowanego JSON serwera wpisz w terminalu komendę:
+If you don't have the JSON server installed, enter the following command in the terminal:
 
 ```
 npm install -g json-server@0.17
 ```
 
-W kolejnym terminalu uruchom API:
+In another terminal, start the API:
 
 ```
 json-server --watch ./data/excursions.json --port 3000
 ```
 
-Od teraz API (w zależności od zasobów) jest dostępne pod adresem:
+From now on, the API (depending on the resources) is available at the following address:
 
 ````
-* http://localhost:3000/excursions – zarządzanie wycieczkami
-* http://localhost:3000/orders – zarządzanie zamówieniami.
+* http://localhost:3000/excursions – managing tours
+* http://localhost:3000/orders – managing orders.
 ````
 
-Aplikacja jest dostępna pod adresem: 
+The application is available at the following address: 
 
 ````
 * http://localhost:8080/index.html – client panel  
