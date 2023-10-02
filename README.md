@@ -1,8 +1,13 @@
 # Excursions App
 
 The application is divided into two parts:
- - Client: https://sadkowa.github.io/Excursions-App/build/index.html
- - Admin: https://sadkowa.github.io/Excursions-App/build/admin.html
+ - Client: 
+
+ <video src="./src//assets/client.mp4" controls title="Title"></video>
+
+ - Admin: 
+
+<video src="./src/assets/admin.mp4" controls title="Title"></video>
 
 ### Client
 This is the part related to what the user can do:
