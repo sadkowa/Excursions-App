@@ -44,6 +44,21 @@
         }
       ],
       "id": 1
+    },
+    {
+      "name": "dddd",
+      "email": "jaoj@isk.pl",
+      "totalSum": "500PLN",
+      "orderDetails": [
+        {
+          "title": "Gdańsk",
+          "adultPrice": "500",
+          "adultNumber": 1,
+          "childPrice": "300",
+          "childNumber": 0
+        }
+      ],
+      "id": 2
     }
   ]
 }

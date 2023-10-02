@@ -3,7 +3,7 @@
 The application is divided into two parts:
  - Client: 
 
- <video src="./src//assets/client.mp4" controls title="Title"></video>
+ <video src="./src//assets/JavaScript_ API oraz FETCH - client, devmentor.pl - Google Chrome 2023-10-02 11-32-20.mp4" controls title="Title"></video>
 
  - Admin: 
 
